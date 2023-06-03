@@ -1,0 +1,23 @@
+domain: outsidious.cloud.okteto.net
+dockerRegistry: outsidious/dockerhub
+service:
+  port:
+  isGateway:
+  image:
+    name:
+    version:
+
+  database:
+    name:
+    host: postgres-service
+    port: 5432
+    username: postgres
+    password: postgres
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 200m
+      memory: 512Mi

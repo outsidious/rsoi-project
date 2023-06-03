@@ -40,7 +40,49 @@ services:
     depends_on:
       - zookeeper
 
-# TODO добавить сервисы
+  gateway:
+    image: gateway
+    restart: on-failure
+    build: v2/gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - loyalty
+      - payment
+      - reservation
+
+  loyalty:
+    image: loyalty
+    restart: on-failure
+    build: v2/loyalty
+    ports:
+      - "8050:8050"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+
+  payment:
+    image: payment
+    restart: on-failure
+    build: v2/payment
+    ports:
+      - "8060:8060"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+
+  reservation:
+    image: reservation
+    restart: on-failure
+    build: v2/reservation
+    ports:
+      - "8070:8070"
+    depends_on:
+      - postgres
+    links:
+      - postgres
 
 volumes:
   db-data:

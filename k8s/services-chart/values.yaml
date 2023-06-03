@@ -1,0 +1,36 @@
+dockerRegistry: outsidious/dockerhub
+
+gateway:
+  service:
+    port: 8080
+    image:
+      name: gateway
+      version: "1.0"
+    isGateway: true
+
+loyalty:
+  service:
+    port: 8050
+    image:
+      name: loyalty
+      version: "1.0"
+    database: 
+      name: loyalty
+
+payment:
+  service:
+    port: 8060
+    image:
+      name: payment
+      version: "1.0"
+    database:
+      name: payment
+
+reservation:
+  service:
+    port: 8070
+    image:
+      name: reservation
+      version: "1.0"
+    database: 
+      name: reservation

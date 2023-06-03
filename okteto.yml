@@ -1,0 +1,107 @@
+name: rsoi-2022-lab4-deploy-to-k8s-outsidious
+
+# The build section defines how to build the images of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#build
+build:
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_GATEWAY_REGISTRY: image registry
+  #  - OKTETO_BUILD_GATEWAY_REPOSITORY: image repo
+  #  - OKTETO_BUILD_GATEWAY_IMAGE: image name
+  #  - OKTETO_BUILD_GATEWAY_TAG: image tag
+  gateway:
+    context: v2\gateway
+    dockerfile: v2\gateway\Dockerfile
+    image: gateway
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_LOYALTY_REGISTRY: image registry
+  #  - OKTETO_BUILD_LOYALTY_REPOSITORY: image repo
+  #  - OKTETO_BUILD_LOYALTY_IMAGE: image name
+  #  - OKTETO_BUILD_LOYALTY_TAG: image tag
+  loyalty:
+    context: v2\loyalty
+    dockerfile: v2\loyalty\Dockerfile
+    image: loyalty
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_PAYMENT_REGISTRY: image registry
+  #  - OKTETO_BUILD_PAYMENT_REPOSITORY: image repo
+  #  - OKTETO_BUILD_PAYMENT_IMAGE: image name
+  #  - OKTETO_BUILD_PAYMENT_TAG: image tag
+  payment:
+    context: v2\payment
+    dockerfile: v2\payment\Dockerfile
+    image: payment
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_POSTGRES_REGISTRY: image registry
+  #  - OKTETO_BUILD_POSTGRES_REPOSITORY: image repo
+  #  - OKTETO_BUILD_POSTGRES_IMAGE: image name
+  #  - OKTETO_BUILD_POSTGRES_TAG: image tag
+  postgres: ""
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_RESERVATION_REGISTRY: image registry
+  #  - OKTETO_BUILD_RESERVATION_REPOSITORY: image repo
+  #  - OKTETO_BUILD_RESERVATION_IMAGE: image name
+  #  - OKTETO_BUILD_RESERVATION_TAG: image tag
+  reservation:
+    context: v2\reservation
+    dockerfile: v2\reservation\Dockerfile
+    image: reservation
+
+# The deploy section defines how to deploy your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#deploy
+deploy:
+  compose:
+    file: docker-compose.yml
+    services:
+      - payment
+      - reservation
+      - postgres
+      - gateway
+      - loyalty
+
+# The dependencies section defines other git repositories to be deployed as part of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#dependencies
+# dependencies:
+#   - https://github.com/okteto/sample
+
+# The dev section defines how to activate a development container
+# More info: https://www.okteto.com/docs/reference/manifest/#dev
+dev:
+  gateway:
+    image: gateway
+    command: bash
+    workdir: /app
+    sync:
+      - .:/app
+    forward:
+      - 9229:9229
+  loyalty:
+    image: loyalty
+    command: bash
+    workdir: /app
+    sync:
+      - .:/app
+    forward:
+      - 9229:9229
+      - 8050:8050
+  payment:
+    image: payment
+    command: bash
+    workdir: /app
+    sync:
+      - .:/app
+    forward:
+      - 9229:9229
+      - 8060:8060
+  reservation:
+    image: reservation
+    command: bash
+    workdir: /app
+    sync:
+      - .:/app
+    forward:
+      - 9229:9229
+      - 8070:8070

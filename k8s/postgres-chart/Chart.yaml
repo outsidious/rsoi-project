@@ -1,0 +1,4 @@
+apiVersion: v1
+name: postgres
+type: application
+version: 1.0.0
