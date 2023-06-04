@@ -228,7 +228,6 @@ export class AppController {
     if (!headers.authorization) {
       throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
     }
-    console.log(headers.authorization);
     const user = this.parseJwt(headers.authorization);
     const username: string = user.name;
     if (!username) throw new BadRequestException('user-name');

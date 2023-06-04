@@ -9,7 +9,7 @@
     },
     {
       "key": "identityProviderUrl",
-      "value": "dev-fsjpqiin4sax6pgn.us.auth0.com",
+      "value": "https://dev-fsjpqiin4sax6pgn.us.auth0.com",
       "enabled": true
     },
     {
