@@ -10,6 +10,8 @@ paths:
       summary: Получить список отелей
       tags:
         - Gateway API
+      security:
+        - bearerAuth: [ ]
       parameters:
         - name: page
           in: query
@@ -31,19 +33,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PaginationResponse"
+        "401":
+          description: Ошибка авторизации
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
   /api/v1/me:
     get:
       summary: Информация о пользователе
       tags:
         - Gateway API
-      parameters:
-        - name: X-User-Name
-          in: header
-          description: Имя пользователя
-          required: true
-          schema:
-            type: string
+      security:
+        - bearerAuth: [ ]
       responses:
         "200":
           description: Полная информация о пользователе
@@ -51,19 +54,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserInfoResponse"
+        "401":
+          description: Ошибка авторизации
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
   /api/v1/reservations:
     get:
       summary: Информация по всем бронированиям пользователя
       tags:
         - Gateway API
-      parameters:
-        - name: X-User-Name
-          in: header
-          description: Имя пользователя
-          required: true
-          schema:
-            type: string
+      security:
+        - bearerAuth: [ ]
       responses:
         "200":
           description: Информация по всем билетам
@@ -73,18 +77,19 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ReservationResponse"
+        "401":
+          description: Ошибка авторизации
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
     post:
       summary: Забронировать отель
       tags:
         - Gateway API
-      parameters:
-        - name: X-User-Name
-          in: header
-          description: Имя пользователя
-          required: true
-          schema:
-            type: string
+      security:
+        - bearerAuth: [ ]
       requestBody:
         content:
           application/json:
@@ -103,12 +108,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ValidationErrorResponse"
+        "401":
+          description: Ошибка авторизации
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
   /api/v1/reservations/{reservationUid}:
     get:
       summary: Информация по конкретному бронированию
       tags:
         - Gateway API
+      security:
+        - bearerAuth: [ ]
       parameters:
         - name: reservationUid
           in: path
@@ -117,12 +130,6 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: X-User-Name
-          in: header
-          description: Имя пользователя
-          required: true
-          schema:
-            type: string
       responses:
         "200":
           description: Информация по конкретному бронированию
@@ -130,6 +137,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ReservationResponse"
+        "401":
+          description: Ошибка авторизации
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "404":
           description: Билет не найден
           content:
@@ -141,6 +154,8 @@ paths:
       summary: Отменить бронирование
       tags:
         - Gateway API
+      security:
+        - bearerAuth: [ ]
       parameters:
         - name: reservationUid
           in: path
@@ -149,15 +164,15 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: X-User-Name
-          in: header
-          description: Имя пользователя
-          required: true
-          schema:
-            type: string
       responses:
         "204":
           description: Бронь успешно отменена
+        "401":
+          description: Ошибка авторизации
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "404":
           description: Бронь не найдена
           content:
@@ -170,13 +185,8 @@ paths:
       summary: Получить информацию о статусе в программе лояльности
       tags:
         - Gateway API
-      parameters:
-        - name: X-User-Name
-          in: header
-          description: Имя пользователя
-          required: true
-          schema:
-            type: string
+      security:
+        - bearerAuth: [ ]
       responses:
         "200":
           description: Данные о бонусном счете
@@ -184,8 +194,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoyaltyInfoResponse"
+        "401":
+          description: Ошибка авторизации
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
     PaginationResponse:
       type: object

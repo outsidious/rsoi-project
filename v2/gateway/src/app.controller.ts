@@ -4,7 +4,10 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   HttpCode,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Query,
@@ -28,13 +31,24 @@ export class AppController {
     private reservationService: ReservationsService,
   ) {}
 
+  parseJwt(token) {
+    return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+  }
+
   @Get('/manage/health')
   async getHealth() {
     return '';
   }
 
   @Get('/hotels')
-  async getHotels(@Query('page') page: number, @Query('size') size: number) {
+  async getHotels(
+    @Headers() headers,
+    @Query('page') page: number,
+    @Query('size') size: number,
+  ) {
+    if (!headers.authorization) {
+      throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
+    }
     return this.reservationService
       .getHotels(page, size)
       .pipe(
@@ -69,22 +83,32 @@ export class AppController {
   }
 
   @Get('/reservations')
-  async getReservations(@Req() request: Request) {
-    const username: string = request.headers['x-user-name']?.toString();
-    if (!username) throw new BadRequestException('x-user-name');
+  async getReservations(@Headers() headers, @Req() request: Request) {
+    if (!headers.authorization) {
+      throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
+    }
+    const user = this.parseJwt(headers.authorization);
+    const username: string = user.name;
+    //console.log(user, username);
+    if (!username) throw new BadRequestException('user-name');
     return this.getAllReservations(username);
   }
 
   @Post('/reservations/')
   @HttpCode(200)
   async createReservation(
+    @Headers() headers,
     @Req() request: Request,
     @Body('startDate') startDate: string,
     @Body('endDate') endDate: string,
     @Body('hotelUid') hotelUid: string,
   ) {
-    const username: string = request.headers['x-user-name']?.toString();
-    if (!username) throw new BadRequestException('x-user-name');
+    if (!headers.authorization) {
+      throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
+    }
+    const user = this.parseJwt(headers.authorization);
+    const username: string = user.name;
+    if (!username) throw new BadRequestException('user-name');
     const hotel = await this.reservationService.getHotel(hotelUid).toPromise();
     const date1 = moment(startDate);
     const date2 = moment(endDate);
@@ -142,11 +166,16 @@ export class AppController {
 
   @Get('/reservations/:reservationId')
   async getReservationById(
+    @Headers() headers,
     @Param('reservationId') uid: string,
     @Req() request: Request,
   ) {
-    const username: string = request.headers['x-user-name']?.toString();
-    if (!username) throw new BadRequestException('x-user-name');
+    if (!headers.authorization) {
+      throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
+    }
+    const user = this.parseJwt(headers.authorization);
+    const username: string = user.name;
+    if (!username) throw new BadRequestException('user-name');
 
     const r = await this.reservationService
       .getReservation(username, uid)
@@ -170,11 +199,16 @@ export class AppController {
   @Delete('/reservations/:reservationId')
   @HttpCode(204)
   async deleteReservation(
+    @Headers() headers,
     @Param('reservationId') uid: string,
     @Req() request: Request,
   ) {
-    const username: string = request.headers['x-user-name']?.toString();
-    if (!username) throw new BadRequestException('x-user-name');
+    if (!headers.authorization) {
+      throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
+    }
+    const user = this.parseJwt(headers.authorization);
+    const username: string = user.name;
+    if (!username) throw new BadRequestException('user-name');
 
     const r = await this.reservationService
       .setReservationStatus(username, uid, 'CANCELED')
@@ -190,9 +224,13 @@ export class AppController {
   }
 
   @Get('loyalty')
-  async getLoyalty(@Req() request: Request) {
-    const username: string = request.headers['x-user-name']?.toString();
-    if (!username) throw new BadRequestException('x-user-name');
+  async getLoyalty(@Headers() headers, @Req() request: Request) {
+    if (!headers.authorization) {
+      throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
+    }
+    const user = this.parseJwt(headers.authorization);
+    const username: string = user.name;
+    if (!username) throw new BadRequestException('user-name');
 
     const l = await this.loaltyService.getLoyalty(username).toPromise();
     return {
@@ -202,9 +240,13 @@ export class AppController {
   }
 
   @Get('/me')
-  async getMe(@Req() request: Request) {
-    const username: string = request.headers['x-user-name']?.toString();
-    if (!username) throw new BadRequestException('x-user-name');
+  async getMe(@Headers() headers, @Req() request: Request) {
+    if (!headers.authorization) {
+      throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
+    }
+    const user = this.parseJwt(headers.authorization);
+    const username: string = user.name;
+    if (!username) throw new BadRequestException('user-name');
     const reservations = await this.getAllReservations(username);
     let loyality = await this.loaltyService.getLoyalty(username).toPromise();
     if (!loyality) {
