@@ -39,7 +39,7 @@ jobs:
           docker push outsidious/dockerhub:payment
           docker push outsidious/dockerhub:reservation
           docker push outsidious/dockerhub:gateway
-          sleep 30
+          sleep 60
 
       - name: Deploy to Okteto
         run: |
