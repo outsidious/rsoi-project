@@ -51,6 +51,7 @@ export class AppController {
       .post('https://dev-fsjpqiin4sax6pgn.us.auth0.com/oauth/token', { username, password },)
       .pipe(
         map((res: any) => {
+          console.log(res);
           return res.data;
         })      
       );
