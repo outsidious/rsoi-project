@@ -22,6 +22,7 @@ import { Payment } from './models/payment';
 import { Reservation } from './models/reservation';
 import { Request } from 'express';
 import { map } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
 
 @Controller('api/v1')
 export class AppController {
@@ -29,6 +30,7 @@ export class AppController {
     private loaltyService: LoyaltyService,
     private paymentService: PaymentService,
     private reservationService: ReservationsService,
+    private readonly http: HttpService
   ) {}
 
   parseJwt(token) {
@@ -38,6 +40,20 @@ export class AppController {
   @Get('/manage/health')
   async getHealth() {
     return '';
+  }
+
+  @Post('/auth/token')
+  async auth(
+    @Query('login') username: string,
+    @Query('password') password: string)
+  {
+    return this.http
+      .get('https://dev-fsjpqiin4sax6pgn.us.auth0.com/oauth/token', { username, password },)
+      .pipe(
+        map((res: any) => {
+          return res.data;
+        })      
+      );
   }
 
   @Get('/hotels')

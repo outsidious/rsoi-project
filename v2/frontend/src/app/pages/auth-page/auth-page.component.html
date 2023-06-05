@@ -1,0 +1,17 @@
+<div class="container">
+  <form [formGroup]="authForm" (submit)="submit()">
+    <div class="label">Email</div>
+    <input
+      type="email"
+      placeholder="example@example.com"
+      formControlName="email"
+    />
+    <div class="label">Password</div>
+    <input type="password" placeholder="qwerty" formControlName="password" />
+    <div>
+      <div class="actions">
+        <button type="submit" class="meetups-button">Log In</button>
+      </div>
+    </div>
+  </form>
+</div>
