@@ -13,8 +13,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./auth-page.component.scss'],
 })
 export class AuthPageComponent implements OnInit {
-  email: string = '';
-  password: string = '';
   authForm!: FormGroup<{
     email: FormControl<string | null>;
     password: FormControl<string | null>;
@@ -27,24 +25,26 @@ export class AuthPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.authForm.valueChanges.subscribe((value) => {
-      console.log(value.email, value.password);
-    });
   }
 
   submit() {
+    console.log(this.authForm.value.email, this.authForm.value.password);
     if (this.authForm.valid) {
-      this.authService.login(this.email, this.password).subscribe(() => {});
+      this.authService
+        .login(
+          this.authForm.value.email ?? '',
+          this.authForm.value.password ?? ''
+        )
+        .subscribe(() => {});
     }
   }
 
-  /*login() {
-    this.authService.login(this.email, this.password).subscribe(() => {});
-  }*/
-
   initForm() {
     this.authForm = this.fBuilder.group({
-      email: ['test', [Validators.required, Validators.pattern(/[A-z]/)]],
+      email: [
+        'rsoi5.test@mail.ru',
+        [Validators.required, Validators.pattern(/[A-z]/)],
+      ],
       password: ['', [Validators.required]],
     });
   }

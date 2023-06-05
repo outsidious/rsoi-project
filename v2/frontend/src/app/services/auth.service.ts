@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
-  baseUrl: string = environment.serviceUrl;
+  baseUrl: string = environment.identityProviderUrl;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -38,12 +38,15 @@ export class AuthService {
     return null;
   }
 
-  login(email: string, password: string) {
+  login(username: string, password: string) {
     return this.http
-      .post<{ token: string }>(`${this.baseUrl}/auth/token`, {
-        username: email,
+      .post<{ token: string }>(`${this.baseUrl}/oauth/token`, {
+        client_id: 'iswgrQFox3rTEcGIDlSQewT5iWx0ODer',
+        client_secret:
+          '7GmlF0ZSD8CxnoXCRqv3bQ-H3KiZgki7tepf1kp98AY0sKFyCW8akGAf6GSrVavw',
+        username,
         password,
-        audience: 'http://127.0.0.1:8080',
+        audience: 'http://127.0.0.1:8080/login',
         grant_type: 'password',
         scope: 'openid',
       })
