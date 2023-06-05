@@ -44,11 +44,11 @@ export class AppController {
 
   @Post('/auth/token')
   async auth(
-    @Query('login') username: string,
+    @Query('username') username: string,
     @Query('password') password: string)
   {
     return this.http
-      .get('https://dev-fsjpqiin4sax6pgn.us.auth0.com/oauth/token', { username, password },)
+      .post('https://dev-fsjpqiin4sax6pgn.us.auth0.com/oauth/token', { username, password },)
       .pipe(
         map((res: any) => {
           return res.data;
