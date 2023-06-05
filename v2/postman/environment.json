@@ -9,7 +9,7 @@
     },
     {
       "key": "identityProviderUrl",
-      "value": "https://dev-05rnu73wlpcpfpqa.us.auth0.com",
+      "value": "https://dev-fsjpqiin4sax6pgn.us.auth0.com",
       "enabled": true
     },
     {
@@ -24,12 +24,12 @@
     },
     {
       "key": "clientId",
-      "value": "iswgrQFox3rTEcGIDlSQewT5iWx0ODer",
+      "value": "pKaBym8vNW6pAvJw0vxY8GDMFrOW1SFO",
       "enabled": true
     },
     {
       "key": "clientSecret",
-      "value": "7GmlF0ZSD8CxnoXCRqv3bQ-H3KiZgki7tepf1kp98AY0sKFyCW8akGAf6GSrVavw",
+      "value": "_yoz1-7AYGTjFCFv0vAGtRaF-c9CtoHsjVhjCjgXThB31kCXUoM7-9Eo3YhsvLtz",
       "enabled": true
     }
   ],
