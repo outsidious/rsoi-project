@@ -40,7 +40,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http
-      .post<{ token: string }>(`${this.baseUrl}/oauth/token`, {
+      .post<{ access_token: string }>(`${this.baseUrl}/oauth/token`, {
         client_id: 'iswgrQFox3rTEcGIDlSQewT5iWx0ODer',
         client_secret:
           '7GmlF0ZSD8CxnoXCRqv3bQ-H3KiZgki7tepf1kp98AY0sKFyCW8akGAf6GSrVavw',
@@ -53,9 +53,11 @@ export class AuthService {
       .pipe(
         tap((res) => {
           console.log(res);
-          if (res.token) {
-            localStorage.setItem('hotels-booking-system_auth_token', res.token);
-            this.router.navigate(['hotels']);
+          if (res.access_token) {
+            localStorage.setItem(
+              'hotels-booking-system_auth_token',
+              res.access_token
+            );
           }
         })
       );

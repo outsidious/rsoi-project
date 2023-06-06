@@ -1,0 +1,93 @@
+header {
+  z-index: 1000;
+  height: 80px;
+  position: fixed;
+  background-color: var(--default-color);
+  width: 100%;
+  border: 1px solid var(--border-color);
+
+  .header-container {
+    height: 100% !important;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+  }
+
+  .title-logo-container {
+    display: flex;
+  }
+
+  .logo-container {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title-logo {
+    margin-left: 30px;
+  }
+
+  .logo {
+    margin-top: 5px;
+    background-image: url(/assets/calendar.svg);
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+  }
+
+  .sections {
+    display: flex;
+    margin-left: 120px;
+  }
+
+  .section-title {
+    padding: 0 5px;
+    margin-right: 35px;
+  }
+
+  .section-title:not(.active-section):hover {
+    text-decoration: underline;
+  }
+
+  .active-section {
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+  }
+
+  .active-section:before {
+    content: "";
+    position: absolute;
+    background-color: var(--accent-color);
+    z-index: -1;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 0;
+    border: 4.5px solid var(--accent-color);
+    border-radius: 3px;
+  }
+
+  .icons {
+    margin-right: 32px;
+    margin-left: auto;
+  }
+}
+
+.fake-header {
+  height: 80px;
+}
+
+.actions {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  vertical-align: center;
+
+  img {
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+  }
+}

@@ -1,4 +1,4 @@
-.container {
+.login-form-container {
   display: flex;
   justify-content: center;
   vertical-align: middle;
@@ -7,12 +7,8 @@
   height: 80vh;
 }
 
-.form-property {
-  padding-bottom: 15px;
-}
-
-.label {
-  padding-right: 30px;
+mat-form-field {
+  width: 400px;
 }
 
 input {
@@ -21,11 +17,10 @@ input {
 
 .actions {
   display: flex;
-  width: 180px;
-  justify-content: flex-end;
-  padding-top: 20px;
+  width: 400px;
+  justify-content: space-between;
 }
 
-input.ng-invalid {
-  border-color: red;
+.instruction-link {
+  width: 120px;
 }

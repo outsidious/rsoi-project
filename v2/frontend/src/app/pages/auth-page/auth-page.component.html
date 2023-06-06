@@ -1,17 +1,43 @@
-<div class="container">
-  <form [formGroup]="authForm" (submit)="submit()">
-    <div class="label">Email</div>
-    <input
-      type="email"
-      placeholder="example@example.com"
-      formControlName="email"
-    />
-    <div class="label">Password</div>
-    <input type="password" placeholder="qwerty" formControlName="password" />
-    <div>
-      <div class="actions">
-        <button type="submit" class="meetups-button">Log In</button>
-      </div>
+<div class="login-form-container">
+  <form class="login-form">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        [formControl]="emailFormControl"
+        [errorStateMatcher]="matcher"
+        placeholder="example@example.com"
+      />
+      <mat-error
+        *ngIf="
+          emailFormControl.hasError('email') &&
+          !emailFormControl.hasError('required')
+        "
+      >
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        [formControl]="passwordFormControl"
+        [errorStateMatcher]="matcher"
+        placeholder="qwerty"
+      />
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="actions">
+      <a class="instruction-link" href="../about">How to create account?</a>
+      <button mat-button (click)="login()">Log In</button>
     </div>
   </form>
 </div>

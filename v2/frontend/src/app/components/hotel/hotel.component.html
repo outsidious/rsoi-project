@@ -1,0 +1,86 @@
+<div class="meetup-card">
+  <div class="meetup-card-header">
+    <div class="title-and-subscribers">
+      <h2 class="meetup-title">
+        {{ hotel?.name }}
+      </h2>
+    </div>
+    <div class="meetup-date-place-container">
+      <h2 class="meetup-date">{{ hotel?.country }}, {{ hotel?.city }}</h2>
+      <label class="meetup-corner-label location-label">
+        от {{ hotel?.price | currency : " " : true : "1.0-0" }} руб
+      </label>
+    </div>
+  </div>
+
+  <div class="meetup-card-body">
+    <ng-container *ngIf="full">
+      <div class="meetup-target">
+        <h3>Адрес</h3>
+        <div class="text-section">
+          {{ hotel?.country }}, {{ hotel?.city }}, {{ hotel?.address }}
+        </div>
+      </div>
+      <div class="meetup-know">
+        <h3>Цена</h3>
+        <div class="text-section">
+          {{ hotel?.price | currency : " " : true : "1.0-0" }} руб
+        </div>
+      </div>
+      <div class="reserve">
+        <mat-form-field>
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input
+              matStartDate
+              formControlName="start"
+              placeholder="Start date"
+            />
+            <input matEndDate formControlName="end" placeholder="End date" />
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <mat-error
+            *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+            >Invalid start date</mat-error
+          >
+          <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
+            >Invalid end date</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="meetup-card-footer">
+    <div class="meetup-author-info">
+      <img
+        *ngFor="let star of stars"
+        src="/assets/icons/star.png"
+        class="icon-person"
+        alt=""
+      />
+    </div>
+    <div class="action-buttons">
+      <button
+        *ngIf="!full"
+        class="button-bottom switch-button"
+        (click)="switchCard()"
+      >
+        <img src="/assets/icons/bottom.svg" alt="" />
+      </button>
+      <button
+        *ngIf="full"
+        class="button-top switch-button"
+        (click)="switchCard()"
+      >
+        <img src="/assets/icons/top.svg" alt="" />
+      </button>
+    </div>
+  </div>
+</div>

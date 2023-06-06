@@ -1,0 +1,32 @@
+<header>
+  <div class="header-container">
+    <div class="title-logo-container">
+      <a class="non-link" href="about"
+        ><div class="title-logo logo-text">Hotels Booking</div>
+      </a>
+      <div class="logo-container">
+        <div class="logo"></div>
+      </div>
+    </div>
+    <div *ngIf="isAuth" class="sections">
+      <div
+        class="section-title title-text"
+        *ngFor="let section of sections"
+        [ngClass]="{ 'active-section': activeSectionId === section.id }"
+      >
+        <a [href]="section.url">{{ section.title }} </a>
+      </div>
+    </div>
+    <div class="icons">
+      <img
+        (click)="redirectToLogin()"
+        *ngIf="!isAuth"
+        src="/assets/icons/login.svg"
+      />
+    </div>
+    <div class="actions">
+      <img (click)="logout()" *ngIf="isAuth" src="/assets/icons/logout.svg" />
+    </div>
+  </div>
+</header>
+<div class="fake-header"></div>

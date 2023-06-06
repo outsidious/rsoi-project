@@ -1,1 +1,5 @@
-<p>hotels-page works!</p>
+<section>
+  <div *ngFor="let hotel of hotels">
+    <app-hotel [hotel]="hotel"> </app-hotel>
+  </div>
+</section>

@@ -1,1 +1,118 @@
-/* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrewcondensed.css);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans&display=swap);
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+:root {
+  --default-color: #2c2c2c;
+  --background-color: #1e1e1e;
+  --primary-color: #b4b4c0;
+  --secondary-color: #4c3f78;
+  --info-color: #008697;
+  --accent-color: #b85526;
+  --bold-color: #cfcece;
+  --border-color: #444444;
+
+  background-color: var(--background-color);
+  color: var(--primary-color);
+
+  .logo-text {
+    font-family: Open Sans Hebrew Condensed;
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 76px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: var(--bold-color);
+  }
+
+  .title-text {
+    font-family: Open Sans Hebrew Condensed;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 33px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: var(--bold-color);
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  input {
+    background-color: var(--default-color) !important;
+    color: var(--bold-color);
+  }
+
+  a {
+    color: var(--info-color);
+  }
+
+  div,
+  p {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    //font-size: 18px;
+    line-height: 25px;
+  }
+
+  h2 {
+    font-family: "Open Sans Hebrew Condensed";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--bold-color);
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--bold-color);
+    margin-bottom: 0px;
+    margin-top: 5px;
+  }
+
+  mat-label {
+    color: var(--primary-color);
+    opacity: 0.8;
+  }
+
+  ::placeholder {
+    color: var(--primary-color);
+    opacity: 0.8;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: var(--primary-color);
+  }
+
+  button {
+    background-color: var(--accent-color);
+    padding: 5px 25px;
+    border: none;
+    border-radius: 5px;
+    color: var(--bold-color);
+  }
+
+  button.secondary {
+    background-color: var(--secondary-color);
+  }
+
+  .non-link {
+    text-decoration: none;
+  }
+
+  section {
+    margin: 15px;
+  }
+}
