@@ -48,7 +48,10 @@
 
   input {
     background-color: var(--default-color) !important;
-    color: var(--bold-color);
+    color: var(--bold-color) !important;
+    border: solid 2px var(--secondary-color) !important;
+    border-radius: 3px !important;
+    //height: 30px !important;
   }
 
   a {
@@ -75,7 +78,7 @@
 
   h3 {
     font-family: "Open Sans";
-    font-weight: 400;
+    font-weight: 500;
     font-size: 16px;
     color: var(--bold-color);
     margin-bottom: 0px;
@@ -89,7 +92,8 @@
 
   ::placeholder {
     color: var(--primary-color);
-    opacity: 0.8;
+    opacity: 0.7;
+    font-size: 12px;
   }
 
   .mat-form-field-appearance-legacy .mat-form-field-label {
@@ -97,11 +101,14 @@
   }
 
   button {
-    background-color: var(--accent-color);
     padding: 5px 25px;
     border: none;
     border-radius: 5px;
     color: var(--bold-color);
+  }
+
+  button.primary {
+    background-color: var(--accent-color);
   }
 
   button.secondary {
@@ -114,5 +121,21 @@
 
   section {
     margin: 15px;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    background-color: var(--background-color);
+  }
+
+  .mat-datepicker-content {
+    background-color: var(--background-color) !important;
+  }
+
+  .mat-calendar-body-cell-content,
+  .mat-mdc-button,
+  .mat-calendar-body-label,
+  .mat-mdc-icon-button,
+  .mat-calendar-table-header {
+    color: var(--primary-color) !important;
   }
 }

@@ -14,13 +14,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AboutPageComponent } from './pages/about/about-page.component';
-import { MatIconModule, MatInputModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HotelsService } from './services/hotels.service';
 import { HotelComponent } from './components/hotel/hotel.component';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -43,12 +43,11 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule,
     MatButtonModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule,
+    MatInputModule,
   ],
   providers: [
     AuthService,
