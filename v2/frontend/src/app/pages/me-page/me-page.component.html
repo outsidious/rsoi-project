@@ -1,1 +1,8 @@
-<p>me-page works!</p>
+<section *ngIf="!loading">
+  <div *ngFor="let reservation of reservations">
+    <app-reservation [reservation]="reservation"> </app-reservation>
+  </div>
+</section>
+<div class="spinner" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>

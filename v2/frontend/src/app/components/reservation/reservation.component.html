@@ -1,0 +1,39 @@
+<div class="meetup-card" [ngClass]="{ conducted: wasConducted() }">
+  <div class="meetup-card-header">
+    <div class="title-and-subscribers">
+      <h2 class="meetup-title">
+        {{ reservation?.hotel?.name }}
+      </h2>
+    </div>
+    <div class="meetup-date-place-container">
+      <h2 class="meetup-date">
+        {{ startDate | date : "dd.MM.YY" }} -
+        {{ endDate | date : "dd.MM.YY" }}
+      </h2>
+      <label class="meetup-corner-label location-label">
+        {{ reservation?.payment?.price | currency : " " : true : "1.0-0" }} руб
+      </label>
+    </div>
+  </div>
+
+  <div class="meetup-card-body">
+    <div>
+      <div class="meetup-target">
+        <div class="text-section">
+          <b>Адрес:</b> {{ reservation?.hotel?.fullAddress }}
+        </div>
+      </div>
+      <div class="meetup-know">
+        <div
+          class="text-section status"
+          [ngClass]="{ green: reservation?.status === 'PAID' }"
+        >
+          <b>Статус:</b> {{ reservation?.status }}
+        </div>
+      </div>
+    </div>
+    <button class="secondary reserve-button" (click)="cancelReserve()">
+      Отменить бронь
+    </button>
+  </div>
+</div>

@@ -11,9 +11,6 @@ import * as moment from 'moment';
 })
 export class HotelComponent implements OnInit {
   @Input() hotel?: HotelI;
-  @Input() createdByCurrentUser: boolean = false;
-  @Input() currentUserId: number | undefined;
-  @Input() subscribed: boolean = false;
 
   full: boolean = false;
   stars: number[] = [];

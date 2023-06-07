@@ -32,6 +32,7 @@ import {
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ReservationComponent } from './components/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HeaderComponent,
     FooterComponent,
     HotelComponent,
+    ReservationComponent,
   ],
   imports: [
     CommonModule,

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
-import { Hotel, HotelI } from '../entities/hotel';
+import { HotelI, ReservationI } from '../entities/hotel';
 
 @Injectable()
 export class HotelsService {
   baseUrl: string = `${environment.serviceUrl}`;
   hotels$ = new BehaviorSubject<HotelI[]>([]);
+  reservations$ = new BehaviorSubject<ReservationI[]>([]);
 
   constructor(private http: HttpClient) {}
 
@@ -33,8 +34,14 @@ export class HotelsService {
     });
   }
 
+  cancelReserve(reserveUid: string) {
+    return this.http.delete(`${this.baseUrl}/reservations/${reserveUid}`);
+  }
+
   getAllReserves() {
-    return this.http.get(`${this.baseUrl}/reservations`);
+    this.http.get(`${this.baseUrl}/reservations`).subscribe((reservations) => {
+      this.reservations$.next(reservations as ReservationI[]);
+    });
   }
 
   /*createMeetup(
