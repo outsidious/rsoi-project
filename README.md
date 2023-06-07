@@ -88,4 +88,4 @@ _Правильное ТЗ (задание 2019-2020 уч. года)_: "Разр
 
 Распределение вариантов заданий аналогично [ЛР #2](https://github.com/bmstu-rsoi/lab2-template).  
 Вариант №2  
-Hotels booking system
+Hotels booking system!
