@@ -31,6 +31,7 @@ jobs:
           docker build ./v2/loyalty/ -t outsidious/dockerhub:loyalty
           docker build ./v2/payment/ -t outsidious/dockerhub:payment
           docker build ./v2/reservation/ -t outsidious/dockerhub:reservation
+          docker build ./v2/statistics/ -t outsidious/dockerhub:statistics
           docker build ./v2/gateway/ -t outsidious/dockerhub:gateway
 
       - name: Push docker images
@@ -38,6 +39,7 @@ jobs:
           docker push outsidious/dockerhub:loyalty
           docker push outsidious/dockerhub:payment
           docker push outsidious/dockerhub:reservation
+          docker push outsidious/dockerhub:statistics
           docker push outsidious/dockerhub:gateway
           sleep 60
 
