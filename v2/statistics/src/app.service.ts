@@ -21,8 +21,8 @@ export class StatisticsService {
     const query = `
         SELECT * FROM ${STATISTICS_TABLE};
       `;
-
     const res = await this.pg.query(query);
+    console.log(res);
     return res.rows;
   }
 

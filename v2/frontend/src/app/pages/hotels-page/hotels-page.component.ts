@@ -4,6 +4,7 @@ import { debounceTime, take, takeUntil } from 'rxjs';
 import { HotelI } from 'src/app/entities/hotel';
 import { AuthService } from 'src/app/services/auth.service';
 import { HotelsService } from 'src/app/services/hotels.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 
 @Component({
   selector: 'app-hotels-page',
@@ -14,7 +15,7 @@ export class HotelsPageComponent implements OnInit {
   hotels: HotelI[] = [];
   loading: boolean = true;
 
-  constructor(private hotelsService: HotelsService) {}
+  constructor(private hotelsService: HotelsService, private statisticsService: StatisticsService) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -28,5 +29,6 @@ export class HotelsPageComponent implements OnInit {
         }
       });
     this.hotelsService.getAllHotels();
+    this.statisticsService.getStatistics();
   }
 }

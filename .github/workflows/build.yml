@@ -49,7 +49,7 @@ jobs:
           kubectl config set-credentials cloud_okteto_com-user --token="$OKTETO_TOKEN"
           kubectl config set-context default --cluster=cloud_okteto_com-cluster --user="cloud_okteto_com-user" --namespace="outsidious"
           kubectl config use-context default
-          cd k8s && helm delete services && helm install services ./services-chart && helm install postgres ./postgres-chart
+          cd k8s && helm delete services && helm delete postgres && helm install postgres ./postgres-chart && helm install services ./services-chart
           sleep 60
 
       - name: Run API Tests

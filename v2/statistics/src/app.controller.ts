@@ -30,10 +30,10 @@ export class AppController {
 
   @Get('/')
   async getAllRecords(@Req() request: Request) {
-    Logger.log(JSON.stringify(request.headers));
     const username: string = request.headers['x-user-name']?.toString();
     if (!username) throw new BadRequestException('x-user-name');
     const records = await this.statistics.getAllRecords();
+    console.log('getAllRecords', records);
     const items = [];
     for (const r of records) {
       items.push(r);

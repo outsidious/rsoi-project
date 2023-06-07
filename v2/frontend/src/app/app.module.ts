@@ -33,6 +33,7 @@ import {
 } from '@angular/material-moment-adapter';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReservationComponent } from './components/reservation/reservation.component';
+import { StatisticsService } from './services/statistics.service';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ReservationComponent } from './components/reservation/reservation.compo
   providers: [
     AuthService,
     HotelsService,
+    StatisticsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
