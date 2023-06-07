@@ -23,6 +23,7 @@ import { Reservation } from './models/reservation';
 import { Request } from 'express';
 import { map } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
+import { StatisticsService } from './services/statistics/statistics.service';
 
 @Controller('api/v1')
 export class AppController {
@@ -30,6 +31,7 @@ export class AppController {
     private loaltyService: LoyaltyService,
     private paymentService: PaymentService,
     private reservationService: ReservationsService,
+    private statisticsService: StatisticsService,
     private readonly http: HttpService
   ) {}
 
@@ -42,20 +44,25 @@ export class AppController {
     return '';
   }
 
-  @Post('/auth/token')
-  async auth(
-    @Query('username') username: string,
-    @Query('password') password: string)
-  {
-    return this.http
-      .post('https://dev-fsjpqiin4sax6pgn.us.auth0.com/oauth/token', { username, password },)
+  @Get('/statistics')
+  async getStatistics(
+    @Headers() headers,
+  ) {
+    if (!headers.authorization) {
+      throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
+    }
+    const user = this.parseJwt(headers.authorization);
+    const username: string = user.name;
+    return this.statisticsService
+      .getStatistics(username)
       .pipe(
-        map((res: any) => {
-          console.log(res);
-          return res.data;
-        })      
-      );
+        map((data: any) => {
+          return { ...data, totalElements: data.items.length };
+        }),
+      )
+      .toPromise();
   }
+
 
   @Get('/hotels')
   async getHotels(
@@ -66,6 +73,9 @@ export class AppController {
     if (!headers.authorization) {
       throw new HttpException('Unathorized', HttpStatus.UNAUTHORIZED);
     }
+    const user = this.parseJwt(headers.authorization);
+    const username: string = user.name;
+    this.statisticsService.createStatistics('Get hotels', username, (new Date()).toISOString());
     return this.reservationService
       .getHotels(page, size)
       .pipe(

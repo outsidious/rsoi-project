@@ -83,6 +83,17 @@ services:
       - postgres
     links:
       - postgres
+  
+  statistics:
+    image: statistics
+    restart: on-failure
+    build: v2/statistics
+    ports:
+      - "8040:8040"
+    depends_on:
+      - postgres
+    links:
+      - postgres
 
 volumes:
   db-data:

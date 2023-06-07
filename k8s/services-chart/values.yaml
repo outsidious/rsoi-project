@@ -14,7 +14,7 @@ loyalty:
     image:
       name: loyalty
       version: "1.0"
-    database: 
+    database:
       name: loyalty
 
 payment:
@@ -32,5 +32,14 @@ reservation:
     image:
       name: reservation
       version: "1.0"
-    database: 
+    database:
       name: reservation
+
+statistics:
+  service:
+    port: 8040
+    image:
+      name: statistics
+      version: "1.0"
+    database:
+      name: statistics

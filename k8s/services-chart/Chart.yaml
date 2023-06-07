@@ -17,4 +17,8 @@ dependencies:
 
   - name: service-chart
     version: 1.0.0
-    alias: reservation 
+    alias: reservation
+
+  - name: service-chart
+    version: 1.0.0
+    alias: statistics

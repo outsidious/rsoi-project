@@ -19,8 +19,11 @@ datases:
 
   - name: payment
     user: postgres
-  
+
   - name: loyalty
+    user: postgres
+
+  - name: statistics
     user: postgres
 
 resources:

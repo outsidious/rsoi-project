@@ -50,6 +50,11 @@ build:
     dockerfile: v2\reservation\Dockerfile
     image: reservation
 
+  statistics:
+    context: v2\statistics
+    dockerfile: v2\statistics\Dockerfile
+    image: statistics
+
 # The deploy section defines how to deploy your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
 deploy:
@@ -61,6 +66,7 @@ deploy:
       - postgres
       - gateway
       - loyalty
+      - statistics
 
 # The dependencies section defines other git repositories to be deployed as part of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#dependencies
@@ -105,3 +111,12 @@ dev:
     forward:
       - 9229:9229
       - 8070:8070
+  statistics:
+    image: statistics
+    command: bash
+    workdir: /app
+    sync:
+      - .:/app
+    forward:
+      - 9229:9229
+      - 8040:8040
