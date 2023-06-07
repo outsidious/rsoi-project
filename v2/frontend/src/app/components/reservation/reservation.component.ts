@@ -23,7 +23,10 @@ export class ReservationComponent implements OnInit {
   }
 
   wasConducted(): boolean {
-    if (this.reservation) return (this.endDate ?? new Date()) < new Date();
+    if (this.reservation && (this.endDate ?? new Date()) < new Date())
+      return true;
+    else if (this.reservation && this.reservation.status === 'CANCELED')
+      return true;
     else return false;
   }
 
