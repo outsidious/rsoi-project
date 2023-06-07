@@ -12,11 +12,11 @@ import {
   Patch,
   Query,
 } from '@nestjs/common';
-import { Reservation, Hotel, StatisticsRecord } from './statistics';
+import { StatisticsRecord } from './statistics';
 import { StatisticsService } from './app.service';
 import { Request } from 'express';
 
-@Controller('reservations')
+@Controller('statistics')
 export class AppController {
   constructor(
     private readonly statistics: StatisticsService,
