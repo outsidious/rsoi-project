@@ -115,10 +115,20 @@
 }
 
 .reserve {
-  padding-top: 5px;
+  padding-top: 15px;
+  padding-left: 20px;
 }
 
 input {
   height: 21px !important;
   width: 81px !important;
+}
+
+.reserve-button {
+  height: 42px;
+  margin-left: 15px;
+}
+
+button:hover {
+  cursor: pointer;
 }

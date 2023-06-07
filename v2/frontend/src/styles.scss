@@ -138,4 +138,12 @@
   .mat-calendar-table-header {
     color: var(--primary-color) !important;
   }
+
+  .spinner {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 }

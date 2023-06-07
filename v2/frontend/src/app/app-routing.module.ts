@@ -10,6 +10,7 @@ const routes: Routes = [
   {
     path: 'hotels',
     component: HotelsPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'me',

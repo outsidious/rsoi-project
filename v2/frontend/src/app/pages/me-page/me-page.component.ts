@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HotelsService } from 'src/app/services/hotels.service';
 
 @Component({
   selector: 'app-me-page',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./me-page.component.scss'],
 })
 export class MePageComponent implements OnInit {
-  constructor() {}
+  constructor(private hotelsService: HotelsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.hotelsService.getAllReserves().subscribe(console.log);
+  }
 }

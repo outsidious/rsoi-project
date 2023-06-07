@@ -1,5 +1,8 @@
-<section>
+<section *ngIf="!loading">
   <div *ngFor="let hotel of hotels">
     <app-hotel [hotel]="hotel"> </app-hotel>
   </div>
 </section>
+<div class="spinner" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>

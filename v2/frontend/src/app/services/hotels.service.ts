@@ -1,24 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { Hotel, HotelI } from '../entities/hotel';
 
 @Injectable()
 export class HotelsService {
   baseUrl: string = `${environment.serviceUrl}`;
+  hotels$ = new BehaviorSubject<HotelI[]>([]);
 
   constructor(private http: HttpClient) {}
 
-  getAllHotels(): Observable<HotelI[]> {
-    return this.http
+  getAllHotels() {
+    this.http
       .get<{
         page: number;
         pageSize: number;
         totalElements: number;
         items: HotelI[];
       }>(`${this.baseUrl}/hotels?page=1&size=100`)
-      .pipe(map((res) => res.items ?? []));
+      .pipe(map((res) => res.items ?? []))
+      .subscribe((items: HotelI[]) => {
+        this.hotels$.next(items);
+      });
+  }
+
+  reserve(hotelUid: number, from: string, to: string) {
+    return this.http.post(`${this.baseUrl}/reservations`, {
+      hotelUid,
+      startDate: from.slice(0, 10),
+      endDate: to.slice(0, 10),
+    });
+  }
+
+  getAllReserves() {
+    return this.http.get(`${this.baseUrl}/reservations`);
   }
 
   /*createMeetup(

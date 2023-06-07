@@ -2,9 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HotelI } from 'src/app/entities/hotel';
 import { HotelsService } from 'src/app/services/hotels.service';
-import { environment } from 'src/environments/environment';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-hotel',
@@ -49,13 +47,15 @@ export class HotelComponent implements OnInit {
     else return '';
   }*/
 
-  subscribe() {
-    /*if (this.meetup?.id && this.currentUserId) {
-      this.meetupService
-        .subscribeMeetup(this.meetup?.id, this.currentUserId)
-        .subscribe((updatedMeetup) => {
-          if (updatedMeetup) this.meetup = updatedMeetup;
+  reserve() {
+    if (this.range.value.start && this.range.value.end) {
+      const from = this.range.value.start.toISOString();
+      const to = this.range.value.end.toISOString();
+      this.hotelsService
+        .reserve(this.hotel!.hotel_uid, from, to)
+        .subscribe((res) => {
+          console.log(res);
         });
-    }*/
+    }
   }
 }

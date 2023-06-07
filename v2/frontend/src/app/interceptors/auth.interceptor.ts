@@ -18,7 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const token = this.authService.token;
-    console.log(token);
     const isApiUrl = request.url.startsWith(environment.serviceUrl);
     if (token && isApiUrl) {
       request = request.clone({
