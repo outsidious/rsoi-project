@@ -1,5 +1,5 @@
 # base image
-FROM node:14-alpine3.12 as build
+FROM node:16.14 as build
 
 
 # set working directory
