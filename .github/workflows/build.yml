@@ -33,6 +33,7 @@ jobs:
           docker build ./v2/reservation/ -t outsidious/dockerhub:reservation
           docker build ./v2/statistics/ -t outsidious/dockerhub:statistics
           docker build ./v2/gateway/ -t outsidious/dockerhub:gateway
+          docker build ./v2/frontend/ -t outsidious/dockerhub:frontend
 
       - name: Push docker images
         run: |
@@ -41,6 +42,7 @@ jobs:
           docker push outsidious/dockerhub:reservation
           docker push outsidious/dockerhub:statistics
           docker push outsidious/dockerhub:gateway
+          docker push outsidious/dockerhub:frontend
           sleep 60
 
       - name: Deploy to Okteto

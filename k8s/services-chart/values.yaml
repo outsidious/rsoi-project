@@ -43,3 +43,12 @@ statistics:
       version: "1.0"
     database:
       name: statistics
+
+frontend:
+  service:
+    port: 4200
+    image:
+      name: frontend
+      version: "1.0"
+    database:
+      name: frontend
