@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { catchError, map, Observable, of } from 'rxjs';
-import { Loyalty } from 'src/models/loyalty';
 import { StatisticsRecord } from 'src/models/statistics';
 
 @Injectable()
