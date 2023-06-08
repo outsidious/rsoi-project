@@ -29,7 +29,7 @@ export class StatisticsService {
 
   public createStatistics(action, username, timestamp) {
     const url = this.host + '/statistics';
-    return this.http
+    this.http
       .post<StatisticsRecord>(
         url,
         {action, timestamp, username},
@@ -40,8 +40,7 @@ export class StatisticsService {
         },
       )
       .pipe(map((res: any) => {
-        console.log(res.data);
         return res.data
-      }));
+      })).subscribe(console.log);
   }
 }
