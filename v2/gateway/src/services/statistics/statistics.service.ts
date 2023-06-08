@@ -11,7 +11,7 @@ export class StatisticsService {
   private host = 'http://statistics-service:8040';
 
   public getStatistics(username): Observable<StatisticsRecord[]> {
-    const url = this.host + '/statistics';
+    const url = this.host;
     return this.http
       .get<StatisticsRecord[]>(url, {
         headers: {
@@ -27,7 +27,7 @@ export class StatisticsService {
   }
 
   public createStatistics(action, username, timestamp) {
-    const url = this.host + '/statistics';
+    const url = this.host;
     return this.http
       .post<StatisticsRecord>(
         url,
