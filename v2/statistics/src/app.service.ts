@@ -41,7 +41,7 @@ export class StatisticsService {
   async createRecord(p: StatisticsRecord) {
     const query = `
         INSERT INTO ${STATISTICS_TABLE} (timestamp, username, action)
-          VALUES ('${p.timestamp}', '${p.username}', ${p.action});
+          VALUES ('${p.timestamp}', '${p.username}', '${p.action}');
         `;
     console.log(query);
     try {
