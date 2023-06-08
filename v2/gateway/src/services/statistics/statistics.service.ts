@@ -39,6 +39,9 @@ export class StatisticsService {
           },
         },
       )
-      .pipe(map((res: any) => res.data));
+      .pipe(map((res: any) => {
+        console.log(res.data);
+        return res.data
+      }));
   }
 }

@@ -48,6 +48,7 @@ export class AppController {
     if (!username) throw new BadRequestException('x-user-name');
     if (body.username != username)
       throw new HttpException('cant create reservation for another user', 403);
+    console.log('createRecord: ', body);
     const r = await this.statistics.createRecord({
       ...body,
     });
