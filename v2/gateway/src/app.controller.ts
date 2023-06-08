@@ -57,7 +57,7 @@ export class AppController {
       .getStatistics(username)
       .pipe(
         map((data: any) => {
-          return { ...data, totalElements: data.items.length ?? 0 };
+          return { ...data, totalElements: data?.items?.length ?? 0 };
         }),
       )
       .toPromise();
@@ -118,6 +118,7 @@ export class AppController {
     const username: string = user.name;
     //console.log(user, username);
     if (!username) throw new BadRequestException('user-name');
+    this.statisticsService.createStatistics('Get reservations', username, (new Date()).toISOString());
     return this.getAllReservations(username);
   }
 
@@ -136,6 +137,7 @@ export class AppController {
     const user = this.parseJwt(headers.authorization);
     const username: string = user.name;
     if (!username) throw new BadRequestException('user-name');
+    this.statisticsService.createStatistics('Post reservation', username, (new Date()).toISOString());
     const hotel = await this.reservationService.getHotel(hotelUid).toPromise();
     const date1 = moment(startDate);
     const date2 = moment(endDate);
@@ -160,6 +162,7 @@ export class AppController {
       status: 'PAID',
       price: resultPay,
     } as Payment;
+    this.statisticsService.createStatistics('Post payment', username, (new Date()).toISOString());
     const p = await this.paymentService
       .createPayment(username, payment)
       .toPromise();
@@ -203,10 +206,11 @@ export class AppController {
     const user = this.parseJwt(headers.authorization);
     const username: string = user.name;
     if (!username) throw new BadRequestException('user-name');
-
+    this.statisticsService.createStatistics(`Get reservation ${uid}`, username, (new Date()).toISOString());
     const r = await this.reservationService
       .getReservation(username, uid)
       .toPromise();
+      this.statisticsService.createStatistics(`Get payment ${r.paymentUid}`, username, (new Date()).toISOString());
     const p = await this.paymentService
       .getPayment(username, r.paymentUid)
       .toPromise();
@@ -236,11 +240,11 @@ export class AppController {
     const user = this.parseJwt(headers.authorization);
     const username: string = user.name;
     if (!username) throw new BadRequestException('user-name');
-
+    this.statisticsService.createStatistics(`Delete reservation ${uid}`, username, (new Date()).toISOString());
     const r = await this.reservationService
       .setReservationStatus(username, uid, 'CANCELED')
       .toPromise();
-
+    this.statisticsService.createStatistics(`Cancel payment ${r.paymentUid}`, username, (new Date()).toISOString());
     const p = await this.paymentService
       .changePaymentState(username, r.paymentUid, 'CANCELED')
       .toPromise();
@@ -258,7 +262,7 @@ export class AppController {
     const user = this.parseJwt(headers.authorization);
     const username: string = user.name;
     if (!username) throw new BadRequestException('user-name');
-
+    this.statisticsService.createStatistics(`Get loyalty`, username, (new Date()).toISOString());
     const l = await this.loaltyService.getLoyalty(username).toPromise();
     return {
       ...l,
@@ -273,6 +277,7 @@ export class AppController {
     }
     const user = this.parseJwt(headers.authorization);
     const username: string = user.name;
+    this.statisticsService.createStatistics(`Get user info`, username, (new Date()).toISOString());
     if (!username) throw new BadRequestException('user-name');
     const reservations = await this.getAllReservations(username);
     let loyality = await this.loaltyService.getLoyalty(username).toPromise();
