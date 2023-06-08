@@ -1,4 +1,24 @@
-app-reservation {
-  display: block;
-  margin-bottom: 10px;
+table {
+  background-color: var(--default-color);
+}
+
+.mdc-data-table__header-cell::ng-deep {
+  color: var(--bold-color) !important;
+  font-size: 15px;
+  font-weight: 700; 
+}
+
+.mdc-data-table__cell::ng-deep {
+  color: var(--bold-color) !important;
+  font-size: 15px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-bottom: 2px solid var(--secondary-color);
+  border-top: 2px solid var(--secondary-color);
 }

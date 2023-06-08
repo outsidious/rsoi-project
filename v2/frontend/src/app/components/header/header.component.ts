@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
     const allSections = [
       { id: 'all_meetups', title: 'Hotels', url: 'hotels' },
       { id: 'my_meetups', title: 'My reservations', url: 'me' },
+      { id: 'statistics', title: 'Statistics', url: 'stat' },
       //{ id: 'users', title: 'Пользователи', url: 'users', access: 'ADMIN' },
     ];
     /*return allSections.filter((section) => {

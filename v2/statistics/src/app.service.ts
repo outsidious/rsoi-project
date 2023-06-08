@@ -19,7 +19,7 @@ export class StatisticsService {
 
   async getAllRecords(): Promise<StatisticsRecord[]> {
     const query = `
-        SELECT * FROM ${STATISTICS_TABLE};
+        SELECT * FROM ${STATISTICS_TABLE} LIMIT 500;
       `;
     const res = await this.pg.query(query);
     console.log(res);

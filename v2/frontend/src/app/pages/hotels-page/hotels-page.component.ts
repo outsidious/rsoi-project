@@ -29,6 +29,5 @@ export class HotelsPageComponent implements OnInit {
         }
       });
     this.hotelsService.getAllHotels();
-    this.statisticsService.getStatistics();
   }
 }
