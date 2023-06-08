@@ -17,4 +17,4 @@ RUN npm install -g @angular/cli@16.0.4
 COPY . /app
 
 # start app
-CMD ng serve
+CMD ng serve --host 0.0.0.0
