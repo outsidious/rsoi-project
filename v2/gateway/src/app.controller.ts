@@ -57,7 +57,7 @@ export class AppController {
       .getStatistics(username)
       .pipe(
         map((data: any) => {
-          return { ...data, totalElements: data?.length ?? 0 };
+          return { items: [...data], totalElements: data?.length ?? 0 };
         }),
       )
       .toPromise();

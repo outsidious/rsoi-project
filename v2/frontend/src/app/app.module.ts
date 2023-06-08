@@ -34,6 +34,8 @@ import {
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { StatisticsService } from './services/statistics.service';
+import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { StatisticsService } from './services/statistics.service';
     FooterComponent,
     HotelComponent,
     ReservationComponent,
+    StatisticsPageComponent
   ],
   imports: [
     CommonModule,
@@ -63,6 +66,7 @@ import { StatisticsService } from './services/statistics.service';
     MatNativeDateModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatTableModule,
   ],
   providers: [
     AuthService,

@@ -7,7 +7,10 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class StatisticsService {
   baseUrl: string = `${environment.serviceUrl}`;
-  statistics$ = new BehaviorSubject<StatisticsRecordI[]>([]);
+  statistics$ = new BehaviorSubject<{
+    totalElements: number;
+    items: StatisticsRecordI[];
+  }>({totalElements: 0, items: []});
 
   constructor(private http: HttpClient) {}
 
@@ -17,9 +20,8 @@ export class StatisticsService {
         totalElements: number;
         items: StatisticsRecordI[];
       }>(`${this.baseUrl}/statistics`)
-      .pipe(tap(console.log), map((res) => res.items ?? []))
-      .subscribe((items: StatisticsRecordI[]) => {
-        this.statistics$.next(items);
+      .subscribe(res => {
+        this.statistics$.next(res);
       });
   }
 }

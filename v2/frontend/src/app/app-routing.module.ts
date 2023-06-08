@@ -5,6 +5,7 @@ import { MePageComponent } from './pages/me-page/me-page.component';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AboutPageComponent } from './pages/about/about-page.component';
+import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutPageComponent,
+  },
+  {
+    path: 'stat',
+    component: StatisticsPageComponent,
   },
   {
     path: '',
