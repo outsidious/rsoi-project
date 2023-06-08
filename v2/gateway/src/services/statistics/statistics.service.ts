@@ -19,7 +19,6 @@ export class StatisticsService {
       })
       .pipe(
         map((res: any) => {
-          console.log('statistics-service in gateway', res);
           return res.data;
         }),
         catchError((e) => of(null)),
@@ -40,6 +39,6 @@ export class StatisticsService {
       )
       .pipe(map((res: any) => {
         return res.data
-      })).subscribe(console.log);
+      })).subscribe();
   }
 }

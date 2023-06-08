@@ -43,7 +43,6 @@ export class StatisticsService {
         INSERT INTO ${STATISTICS_TABLE} (timestamp, username, action)
           VALUES ('${p.timestamp}', '${p.username}', '${p.action}');
         `;
-    console.log(query);
     try {
       await this.pg.query(query);
       return 'ok';

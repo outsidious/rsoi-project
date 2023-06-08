@@ -33,7 +33,6 @@ export class AppController {
     const username: string = request.headers['x-user-name']?.toString();
     if (!username) throw new BadRequestException('x-user-name');
     const records = await this.statistics.getAllRecords();
-    console.log('getAllRecords', records);
     const items = [];
     for (const r of records) {
       items.push(r);
@@ -48,7 +47,6 @@ export class AppController {
     if (!username) throw new BadRequestException('x-user-name');
     if (body.username != username)
       throw new HttpException('cant create reservation for another user', 403);
-    console.log('createRecord: ', body);
     const r = await this.statistics.createRecord({
       ...body,
     });
