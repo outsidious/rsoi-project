@@ -6,6 +6,7 @@ import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AboutPageComponent } from './pages/about/about-page.component';
 import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
   {
     path: 'stat',
     component: StatisticsPageComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: '',
