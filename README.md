@@ -1,4 +1,4 @@
-# Курсовой Проект
+# Курсовой Проект 
 
 [![Build Project](https://github.com/Romanow/rsoi-project/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Romanow/rsoi-project/actions/workflows/build.yml)
 
