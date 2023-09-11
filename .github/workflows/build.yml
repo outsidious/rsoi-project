@@ -1,11 +1,11 @@
-name: Build Project
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+#name: Build Project
+#on:
+  #push:
+  #  branches:
+  #    - master
+  #pull_request:
+  #  branches:
+  #    - master
 env:
   OKTETO_SERVER: ${{ secrets.OKTETO_SERVER }}
   OKTETO_TOKEN: ${{ secrets.OKTETO_TOKEN }}
